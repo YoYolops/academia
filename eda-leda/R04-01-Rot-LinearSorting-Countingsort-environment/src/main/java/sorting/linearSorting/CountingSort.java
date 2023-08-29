@@ -19,16 +19,17 @@ public class CountingSort extends AbstractSorting<Integer> {
 
 	@Override
 	public void sort(Integer[] array, int leftIndex, int rightIndex) {
-        int highestValue = -1;
-        int[] responseArray = new int[array.length];
-        for(int i = 0; i < array.length; i++) if(array[i] > highestValue) highestValue = array[i];
-        
-        int[] frequencyArray = new int[highestValue+1];
-        for(int num : array) frequencyArray[num] += 1;
+        if(leftIndex >= rightIndex) return;
 
+        int highestValue = -1;
+        int[] responseArray = new int[(rightIndex - leftIndex) + 1];
+        for(int i = leftIndex; i <= rightIndex; i++) if(array[i] > highestValue) highestValue = array[i];
+        int[] frequencyArray = new int[highestValue+1];
+        for(int i = leftIndex; i <= rightIndex; i++) frequencyArray[array[i]] += 1;
+        
         for(int i = 1; i < frequencyArray.length; i++) frequencyArray[i] += frequencyArray[i-1];
         
-        for(int i = array.length-1; i >= 0; i--) {
+        for(int i = rightIndex; i >= leftIndex; i--) {
             // Por que tem que ter o -1 na linha 33?
             responseArray[frequencyArray[array[i]]-1] = array[i];
             frequencyArray[array[i]] -= 1;
