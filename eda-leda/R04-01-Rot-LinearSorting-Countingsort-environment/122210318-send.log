@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-08-31T14:40:25.877-0300</date>
+  <logger>YOHAN LOPES RODRIGUES</logger>
+  <level>FINE</level>
+  <message>File 122210318-YOHAN LOPES RODRIGUES.zip was received. It was sent by YOHAN LOPES RODRIGUES from IP 192.168.0.8 at 31-08-2023 14*40*25</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-08-31T14:56:29.059-0300</date>
+  <logger>YOHAN LOPES RODRIGUES</logger>
+  <level>FINE</level>
+  <message>File 122210318-YOHAN LOPES RODRIGUES.zip was received. It was sent by YOHAN LOPES RODRIGUES from IP 192.168.0.8 at 31-08-2023 14*56*29</message>
+</record>
