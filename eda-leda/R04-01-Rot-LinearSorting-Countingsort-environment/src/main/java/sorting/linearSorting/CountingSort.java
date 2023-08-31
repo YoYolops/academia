@@ -1,7 +1,5 @@
 package sorting.linearSorting;
 
-import java.util.Arrays;
-
 import sorting.AbstractSorting;
 
 /**
@@ -22,18 +20,30 @@ public class CountingSort extends AbstractSorting<Integer> {
         if(leftIndex >= rightIndex) return;
 
         int highestValue = -1;
+        // criando o array de respostas baseado no tamanho da entrada a ser ordenada
         int[] responseArray = new int[(rightIndex - leftIndex) + 1];
+        // Encontrando o maior elemento no trecho pedido
         for(int i = leftIndex; i <= rightIndex; i++) if(array[i] > highestValue) highestValue = array[i];
+
+        // Construindo o array de frequências com base no maior valor encontrado
         int[] frequencyArray = new int[highestValue+1];
         for(int i = leftIndex; i <= rightIndex; i++) frequencyArray[array[i]] += 1;
         
+        // Realizando somatório para manter o algoritmo estável
         for(int i = 1; i < frequencyArray.length; i++) frequencyArray[i] += frequencyArray[i-1];
         
+        // Calculando as respostas e inserindo no array resposta
         for(int i = rightIndex; i >= leftIndex; i--) {
             // Por que tem que ter o -1 na linha 33?
             responseArray[frequencyArray[array[i]]-1] = array[i];
             frequencyArray[array[i]] -= 1;
         }
-        System.out.println(Arrays.toString(responseArray));
+
+        // Populando o array de entranda com os valores ordenados
+        int responseArrayCounter = 0;
+        for(int i = leftIndex; i <= rightIndex; i++) {
+            array[i] = responseArray[responseArrayCounter];
+            responseArrayCounter++;
+        }
     }
 }
