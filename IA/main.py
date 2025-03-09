@@ -104,13 +104,28 @@ class OrdenadorGenetico:
         recem_nascidos = []
 
         for i in range(len(grupo2)):
+            # gera dois individuos para cada cruzamento
             recem_nascidos.append(grupo2[i].cruzar(grupo1[i]))
+            recem_nascidos.append(grupo1[i].cruzar(grupo2[i]))
         
-        self.individuos = grupo1 + grupo2 + recem_nascidos
+        self.individuos = recem_nascidos
+        self.geracao_atual += 1
+
+    def get_numero_geracao_atual(self):
+        return self.geracao_atual
+
+
+def main():
+    # Definir sequência a ser trabalhada e populacao inicial (20 individuos)
+    ordenadorGenetico = OrdenadorGenetico([5,3,2,4,1], 20)
+    print(f"Geracao atual: {ordenadorGenetico.get_numero_geracao_atual()}")
+
+    # Seleção a partir de funcao aptidão
+    ordenadorGenetico.executar_selecao()
 
 
         
-print("oi")
+main()
 
 
 
