@@ -1,6 +1,9 @@
 import random
 
 PROBABILIDADE_MUTACAO_INDIVIDUO = 0.2
+ESTADO_INICIAL = [5,3,2,4,1]
+QUANT_INDIVIDUOS = 20
+ESTADO_ALVO = sorted(ESTADO_INICIAL) 
 
 def get_par_mais_proximo_da_metade(numero):
     metade = numero / 2
@@ -62,6 +65,9 @@ class Individuo:
                 elementos_faltantes.remove(escolha)
         
         return Individuo(estado_inicial_novo_individuo)
+    
+    def is_individuo_ideal(self, estado_alvo):
+        return self.estado == estado_alvo
 
 
 class OrdenadorGenetico:
@@ -73,10 +79,13 @@ class OrdenadorGenetico:
             # Cria individuos, cada com estado inicial sendo o arr_desordenado em ordem aleatoria
             self.individuos.append(Individuo(estado_inicial=arr_desordenado))
 
+    def get_individuos(self):
+        return self.individuos
+
     # recebe um individuo e devolve um numero referente à sua aptidão
     def get_aptidao(self, individuo):
         num_aptidao = 0
-        for i in range(self.estado_alvo):
+        for i in range(len(self.estado_alvo)):
             if individuo.get_estado()[i] == self.estado_alvo[i]:
                 num_aptidao += 1
         return num_aptidao
@@ -116,12 +125,30 @@ class OrdenadorGenetico:
 
 
 def main():
+    finished = False
     # Definir sequência a ser trabalhada e populacao inicial (20 individuos)
-    ordenadorGenetico = OrdenadorGenetico([5,3,2,4,1], 20)
-    print(f"Geracao atual: {ordenadorGenetico.get_numero_geracao_atual()}")
+    ordenadorGenetico = OrdenadorGenetico(ESTADO_INICIAL, QUANT_INDIVIDUOS)
 
-    # Seleção a partir de funcao aptidão
-    ordenadorGenetico.executar_selecao()
+    while not finished:
+        print(f"Geracao atual: {ordenadorGenetico.get_numero_geracao_atual()}")
+
+        # Seleção a partir de funcao aptidão
+        ordenadorGenetico.executar_selecao()
+
+        # Cruza a geracao atual entre si
+        # Novos nascidos tem chance PROBABILIDADE_MUTACAO_INDIVIDUO de sofrer mutação
+        ordenadorGenetico.cruzar_geracao_atual()
+
+        for individuo in ordenadorGenetico.get_individuos():
+            if individuo.is_individuo_ideal(ESTADO_ALVO):
+                print(f"Indivíduo ideal foi atingido: {individuo.get_estado()}")
+                finished = True
+                break
+        if not finished:
+            print("O indivíduo ideal não foi atingido na geração atual.")
+            print()
+            print("=====================================================")
+            print()
 
 
         
