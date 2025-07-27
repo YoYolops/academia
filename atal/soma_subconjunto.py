@@ -1,8 +1,4 @@
 
-
-
-
-
 def soma_subconjunto(numeros, alvo):
     escolhidos = [0 for _ in numeros]
     solucoes = [] # vai ser array de escolhidos
