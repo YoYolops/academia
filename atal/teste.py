@@ -1,17 +1,9 @@
-def normalize(s: str) -> str:
-    n = len(s)
-    if n % 2 == 1:
-        return s
-    mid = n // 2
-    left = normalize(s[:mid])
-    right = normalize(s[mid:])
+def f(n):
+    output = 0
+    for i in range(1, 7):
+        output += sum(f(n-i), i)
+        
 
-    if left < right:
-        return left + right
-    else:
-        return right + left
-
-s1 = input().strip()
-s2 = input().strip()
-
-print("YES" if normalize(s1) == normalize(s2) else "NO")
+while True:
+    inpt = int(input().strip())
+    print(f(inpt))
