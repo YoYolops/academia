@@ -1,9 +1,6 @@
-def f(n):
-    output = 0
-    for i in range(1, 7):
-        output += sum(f(n-i), i)
-        
+labs_mean = (5+7+0)/3
+mts_mean = (10+10+7.5+7+7)/5
 
-while True:
-    inpt = int(input().strip())
-    print(f(inpt))
+print(f"Média Minitestes: {mts_mean}")
+print(f"Média Labs: {labs_mean}")
+print(f"Média Geral: {(mts_mean*0.7) + (labs_mean*0.3)}")
